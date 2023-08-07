@@ -6,4 +6,4 @@
 
 ## Contributors
 
-- Guilherme Deon de Faria <gdfaria@ucs.br>
+- Guilherme Deon de Faria <gdfaria@ucs.br> ;
