@@ -4,4 +4,17 @@
 
 minha_lista = list()
 
-print(type(minha_lista))
+i = 0
+
+while i < 3:
+    try:
+        value = int(input("\nDigite um número inteiro\n"))
+        minha_lista.append(value)
+        i = i + 1
+        print("Ok")
+    except:
+        print("Nao e um numero inteiro")
+
+print("\nItens:")
+for item in minha_lista:
+    print(item)
