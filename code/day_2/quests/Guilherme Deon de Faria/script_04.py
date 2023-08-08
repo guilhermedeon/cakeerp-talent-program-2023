@@ -2,8 +2,10 @@
 4 - Faça um programa, com uma função que necessite de três argumentos, e que forneça a soma desses três argumentos.
 '''
 
-minha_lista = list()
+def somar(n1,n2,n3):
+    return round(n1+n2+n3,2)
 
+minha_lista = list()
 i = 0
 
 while i < 3:
@@ -14,11 +16,12 @@ while i < 3:
     except:
         print("Valor invalido")
 
-soma = 0
 
-for item in minha_lista:
-    soma = soma + item
-
-soma = round(soma,2)
+soma = somar(
+    minha_lista[0],
+    minha_lista[1],
+    minha_lista[2]
+    )
 
 print("Soma final = " + str(soma))
+
