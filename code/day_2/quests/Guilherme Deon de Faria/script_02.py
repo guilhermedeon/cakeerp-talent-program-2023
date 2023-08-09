@@ -19,11 +19,9 @@ while i < 5:
         print("Erro no input")
 
 print("\n\nPessoas:")
-
-index = 1
-for item in minha_lista:
-    print("\nPessoa n: " + str(index))
-    print("Idade = " + str(item[0]))
-    print("Altura = " + str(item[1]) + "cm")
-    index = index + 1
+for i in range(len(minha_lista)-1,-1,-1):
+    pessoa = minha_lista[i]
+    print("\nPessoa n: " + str(i+1))
+    print("Idade = " + str(pessoa[0]))
+    print("Altura = " + str(pessoa[1]) + "cm")
 
