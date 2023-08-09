@@ -12,7 +12,7 @@ while i < 5:
         print("\nPessoa n: " + str(i+1))
         idade = int(input("Digite a idade\n"))
         altura = int(input("Digite a altura em cm\n"))
-        minha_lista.append((idade,altura))
+        minha_lista.append([idade,altura])
         print("Ok")
         i = i+1
     except:
@@ -26,3 +26,4 @@ for item in minha_lista:
     print("Idade = " + str(item[0]))
     print("Altura = " + str(item[1]) + "cm")
     index = index + 1
+
