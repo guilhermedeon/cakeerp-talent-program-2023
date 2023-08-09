@@ -6,7 +6,7 @@ minha_lista = list()
 
 i = 0
 
-while i < 3:
+while i < 5:
     try:
         value = int(input("\nDigite um número inteiro\n"))
         minha_lista.append(value)
