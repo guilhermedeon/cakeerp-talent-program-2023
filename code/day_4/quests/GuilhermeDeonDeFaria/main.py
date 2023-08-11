@@ -23,33 +23,31 @@ def find_all(db: Session = Depends(get_db)):
     return [CursoResponse.from_orm(curso) for curso in cursos]
 
 #Read (by id)
-#Setting response_model = CursoResponse invalidates when returning {"message" : "Curso nao encontrado"}
-@app.get("/api/cursos/{curso_id}", status_code=status.HTTP_200_OK)
+@app.get("/api/cursos/{curso_id}",response_model=CursoResponse, status_code=status.HTTP_200_OK)
 def find_by_id(db: Session = Depends(get_db), curso_id : int = None):
-    try:
-        curso = CursoRepository.find_by_id(db,curso_id)
-        return CursoResponse.from_orm(curso)
-    except:
-        return {"message" : "Curso nao encontrado"}
+    curso = CursoRepository.find_by_id(db,curso_id)
+    if curso == None:
+        raise HTTPException(status_code=404, detail="Curso nao encontrado")
+    return CursoResponse.from_orm(curso)
 
 #Delete (by id)
 @app.delete("/api/cursos/{curso_id}", status_code=status.HTTP_204_NO_CONTENT)
 def delete_by_id(db: Session = Depends(get_db), curso_id : int = None):
+    curso = CursoRepository.find_by_id(db,curso_id)
+    if curso == None:
+        raise HTTPException(status_code=404, detail="Curso nao encontrado")
     CursoRepository.delete_by_id(db,curso_id)
 
 #Update (by id)
-@app.put("/api/cursos/{curso_id}", status_code=status.HTTP_200_OK)
+@app.put("/api/cursos/{curso_id}", response_model=CursoResponse, status_code=status.HTTP_200_OK)
 def update_by_id(request: CursoRequest, db: Session = Depends(get_db), curso_id : int = None):
-    try:
-        curso = CursoRepository.find_by_id(db,curso_id)
-        if curso == None:
-            raise Exception
-        curso = Curso(**request.dict())
-        curso.id = curso_id
-        curso = CursoRepository.save(db, curso)
-        return CursoResponse.from_orm(curso)
-    except:
-        return {"message" : "Curso nao encontrado"}
+    curso = CursoRepository.find_by_id(db,curso_id)
+    if curso == None:
+        raise HTTPException(status_code=404, detail="Curso nao encontrado")
+    curso = Curso(**request.dict())
+    curso.id = curso_id
+    curso = CursoRepository.save(db, curso)
+    return CursoResponse.from_orm(curso)
 
 def custom_openapi():
     if app.openapi_schema:
